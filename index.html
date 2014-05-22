@@ -11,10 +11,19 @@
         <h1>Testing Backbone-Debugger</h1>
         <ol>
             <li>Install <a href="https://chrome.google.com/webstore/detail/backbone-debugger/bhljhndlimiafopmmhjlgfpnnchjjbhd">Backbone Debugger</a></li>
-            <li>Download this repo: <code>git clone https://github.com/piecioshka/test-backbone-debugger.git</code></li>
-            <li>Run <code>bower install</code></li>
-            <li>Open project in web browser <strong>Google Chrome</strong></li>
-            <li>Open DevTools and watch what will happen ;)</li>
+            <li>If you can try do yourself
+                <ol>
+                    <li>Download this repo: <code>git clone https://github.com/piecioshka/test-backbone-debugger.git</code></li>
+                    <li>Run <code>bower install</code></li>
+                    <li>Open project in web browser <strong>Google Chrome</strong></li>
+                </ol>
+            </li>
+            <li>Or without any installation
+                <ol>
+                    <li>Open <a href="http://test-backbone-debugger.jsninja.pl">http://test-backbone-debugger.jsninja.pl</a> in web browser <strong>Google Chrome</strong>.</li>
+                </ol>
+            </li>
+            <li>Open <em>DevTools -> Backbone</em> and watch what will happen ;)</li>
         </ol>
     </article>
 
@@ -23,19 +32,22 @@
     <script src="vendor/backbone/backbone.js"></script>
     <script src="scripts/app.js"></script>
 
-    <div id="disqus_thread" class="well-lg"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'test-backbone-debugger'; // required: replace example with your forum shortname
+    <article class="well-lg">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'test-backbone-debugger'; // required: replace example with your forum shortname
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
 
 </body>
 </html>
