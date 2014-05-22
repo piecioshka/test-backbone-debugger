@@ -1,0 +1,10 @@
+{
+    "name": "test-backbone-debugger",
+    "version": "0.0.1",
+    "dependencies": {
+        "bootstrap": "latest",
+        "jquery": "latest",
+        "underscore": "latest",
+        "backbone": "latest"
+    }
+}
