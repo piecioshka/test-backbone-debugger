@@ -1,32 +1,48 @@
+/*global _, $, Backbone */
+
 $(function () {
     'use strict';
 
     // ------------------------------
 
     var Model = Backbone.Model.extend({
-        defaults: { title: null }
+        defaults: {
+            title: 'none'
+        },
+
+        constructor: function Model() {
+            Backbone.Model.apply(this, arguments);
+        }
     });
-    var m = window.m = new Model();
 
     // ------------------------------
 
     var Collection = Backbone.Collection.extend({
         model: Model,
+        localStorage: new Backbone.SessionStorage('test-backbone-debugger'),
 
-        localStorage: new Backbone.SessionStorage('test-backbone-debugger')
+        constructor: function Collection() {
+            Backbone.Collection.apply(this, arguments);
+        }
     });
-    var c = window.c = new Collection();
 
     // ------------------------------
 
     var Widget = Backbone.View.extend({
         tagName: 'li',
 
-        initialize: function () {
+        constructor: function Widget() {
+            Backbone.View.apply(this, arguments);
+
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'destroy', this.remove);
 
-            this.model.save({ title: 'te' });
+            this.model.save();
+        },
+
+        render: function () {
+            this.$el.text(this.model.get('title'));
+            return this;
         }
     });
 
@@ -35,25 +51,51 @@ $(function () {
     var View = Backbone.View.extend({
         el: '#app',
 
-        initialize: function () {
-            this.listenTo(c, 'add', this.add);
+        constructor: function View() {
+            Backbone.View.apply(this, arguments);
+
+            this.collection = new Collection();
+            this.listenTo(this.collection, 'add', this.add);
         },
 
-        add: function (i) {
-            var o = window.o = new Widget({ model: i });
-            this.$el.find('ul').append(o.render().$el);
+        add: function (widget) {
+            console.log('View#add', widget);
+
+            var o = new Widget({
+                model: widget
+            });
+
+            var $ul = this.$el.find('ul');
+
+            $ul.append(o.render().$el);
         },
 
         render: function () {
+            console.log('View#render');
             this.$el.html($('<ul>'));
         }
     });
 
-    var v = window.v = new View();
+    var v = new View();
     v.render();
 
-    c.add(m);
+    v.collection.add(new Model({ title: 'cookie' }));
+    v.collection.add(new Model({ title: 'dog' }));
+    v.collection.add(new Model());
+    v.collection.add(new Model());
+    v.collection.add(new Model({ title: 'computer' }));
 
-    _.invoke(c.models, 'destroy');
+    // Bad solution
+    // _.invoke(v.collection.models, 'destroy')
+
+    // Weak solution, because remove only view related with models (don't delete model instance)
+    // _.invoke(v.collection.models, 'trigger', 'destroy');
+
+    // The best solution - delete models and views related with it
+    var model = v.collection.first();
+    while (model) {
+        model.destroy();
+        model = v.collection.first();
+    }
 
 });
