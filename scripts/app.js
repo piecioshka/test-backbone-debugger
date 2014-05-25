@@ -3,6 +3,18 @@
 $(function () {
     'use strict';
 
+    Backbone.Collection.prototype.destroy = function () {
+        var self = this;
+        this.sync('delete', this, {
+            success: function (msg) {
+                console.log(self.constructor.name, ': delete (Success)', msg);
+            },
+            error: function (msg) {
+                console.log(self.constructor.name, ': delete (Error)', msg);
+            }
+        });
+    };
+
     // ------------------------------
 
     var Model = Backbone.Model.extend({
@@ -54,8 +66,18 @@ $(function () {
         constructor: function View() {
             Backbone.View.apply(this, arguments);
 
+            var self = this;
             this.collection = new Collection();
             this.listenTo(this.collection, 'add', this.add);
+
+            this.collection.sync('create', this.collection, {
+                success: function (msg) {
+                    console.log(self.constructor.name + ': create (Success)', msg);
+                },
+                error: function (msg) {
+                    console.log(self.constructor.name + ': create (Error)', msg);
+                }
+            });
         },
 
         add: function (widget) {
@@ -91,11 +113,14 @@ $(function () {
     // Weak solution, because remove only view related with models (don't delete model instance)
     // _.invoke(v.collection.models, 'trigger', 'destroy');
 
-    // The best solution - delete models and views related with it
+    // The best solution to delete models and views related with it
     var model = v.collection.first();
     while (model) {
         model.destroy();
         model = v.collection.first();
     }
+
+    // Custom method extended Backbone.Collection which delete with `sync` method.
+    v.collection.destroy();
 
 });
