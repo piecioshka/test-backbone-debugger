@@ -6,9 +6,9 @@
     * Run `bower install`
     * Open project in web browser *Google Chrome*
 * Or without any installation
-    * Open [http://test-backbone-debugger.jsninja.pl/][2] in web browser *Google Chrome*
+    * Open [http://piecioshka.pl/projects/test-backbone-debugger/][2] in web browser *Google Chrome*
 * Open _DevTools -> Backbone_ and watch what will happen ;)
 
 
 [1]: https://chrome.google.com/webstore/detail/backbone-debugger/bhljhndlimiafopmmhjlgfpnnchjjbhd
-[2]: http://test-backbone-debugger.jsninja.pl/
+[2]: http://piecioshka.pl/projects/test-backbone-debugger/
