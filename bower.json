@@ -1,4 +1,5 @@
 {
+    "private": true,
     "name": "test-backbone-debugger",
     "version": "0.0.2",
     "dependencies": {
